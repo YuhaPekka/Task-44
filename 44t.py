@@ -4,9 +4,14 @@ import random
 lst = ['robot'] * 10
 lst += ['human'] * 10
 random.shuffle(lst)
-
 data = pd.DataFrame({'whoAmI': lst})
 
-one_hot_encoded = pd.get_dummies(data, columns=['whoAmI'])
+one_hot = pd.DataFrame()
+one_hot['robot'] = (data['whoAmI'] == 'robot').astype(int)
+one_hot['human'] = (data['whoAmI'] == 'human').astype(int)
 
-print(one_hot_encoded.head())
+
+
+one_hot.to_csv('csv.csv')
+print(one_hot.head(20))
+    
